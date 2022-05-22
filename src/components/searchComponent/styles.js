@@ -1,14 +1,30 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  searching: {
     flex: 1,
     alignItems: 'center',
     paddingVertical: 50,
     justifyContent: 'space-around',
     flexDirection: 'row',
+  },
+  container:{
     borderBottomWidth: 1,
     borderStyle: 'dashed',
+  },
+  filters:{
+    alignItems: 'center',
+    paddingBottom: 20,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+  },
+  filterBtn:{
+    width: '15%',
+    borderRadius: 10,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E74C3C',
   },
   inputView: {
     backgroundColor: '#D2FFD1',
