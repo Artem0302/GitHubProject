@@ -24,26 +24,26 @@ const Authorization = () => {
         />
       </TouchableOpacity>
 
-      <View style={styles.inputView}>
-        <TextInput
-          placeholder="Email"
-          placeholderTextColor="#003f5c"
-          onChangeText={text => setEmail(text)}
-        />
-      </View>
+      {/*<View style={styles.inputView}>*/}
+      {/*  <TextInput*/}
+      {/*    placeholder="Email"*/}
+      {/*    placeholderTextColor="#003f5c"*/}
+      {/*    onChangeText={text => setEmail(text)}*/}
+      {/*  />*/}
+      {/*</View>*/}
 
-      <View style={styles.inputView}>
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-        />
-      </View>
+      {/*<View style={styles.inputView}>*/}
+      {/*  <TextInput*/}
+      {/*    placeholder="Password"*/}
+      {/*    placeholderTextColor="#003f5c"*/}
+      {/*    secureTextEntry={true}*/}
+      {/*    onChangeText={text => setPassword(text)}*/}
+      {/*  />*/}
+      {/*</View>*/}
 
-      <TouchableOpacity>
-        <Text style={styles.forgot_button}>Forgot Password?</Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity>*/}
+      {/*  <Text style={styles.forgot_button}>Forgot Password?</Text>*/}
+      {/*</TouchableOpacity>*/}
 
       <TouchableOpacity
         style={styles.loginBtn}
