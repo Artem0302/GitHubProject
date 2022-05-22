@@ -10,7 +10,6 @@ const Stack = createNativeStackNavigator();
 
 const MainApp = () => {
   const isSignedIn = useSelector(state => {
-    console.log(state);
     return state.isSignedIn;
   });
   return (
