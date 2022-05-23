@@ -10,14 +10,12 @@ export const signIn = (password, email) => {
 };
 
 export const getRepos = (repoName, currentPage,filter='') => {
-  console.log(repoName, currentPage);
   return async dispatch => {
     const response = await axios
       .get(
         `https://api.github.com/search/repositories?q=${repoName}${filter}&per_page=15&page=${currentPage}`,
       )
       .catch(error => console.log(error));
-    console.log(response.data);
     dispatch(setRepos(response.data));
   };
 };
