@@ -1,18 +1,14 @@
-import { CLEAR_REPOS, SET_CURRENT_PAGE, SET_REPOS, SIGN_IN } from "../constants";
+import {CLEAR_REPOS, SET_CURRENT_PAGE, SET_REPOS} from '../constants';
+import userReducer from './userReducer';
+import {combineReducers} from 'redux';
 
 export const defaultState = {
   items: [],
-  correctPassword: true,
-  isSignedIn: false,
   currentPage: 1,
 };
 
 const MainReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case SIGN_IN:
-      return Object.assign({}, state, {
-        isSignedIn: !state.isSignedIn,
-      });
     case SET_REPOS:
       return {
         ...state,
@@ -33,4 +29,7 @@ const MainReducer = (state = defaultState, action) => {
   }
 };
 
-export default MainReducer;
+export default combineReducers({
+  MainReducer,
+  userReducer,
+});

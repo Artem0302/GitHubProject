@@ -12,7 +12,12 @@ const transporter = nodemailer.createTransport(
 );
 
 function getRandomInt() {
-  return `${Math.floor(Math.random() * 10)}`+`${Math.floor(Math.random() * 10)}`+`${Math.floor(Math.random() * 10)}`+`${Math.floor(Math.random() * 10)}`;
+  return (
+    `${Math.floor(Math.random() * 10)}` +
+    `${Math.floor(Math.random() * 10)}` +
+    `${Math.floor(Math.random() * 10)}` +
+    `${Math.floor(Math.random() * 10)}`
+  );
 }
 
 class authController {
@@ -24,8 +29,10 @@ class authController {
         `INSERT INTO users (name,surname, password, email, type, dateofbirth) values ($1, $2, $3, $4, $5, $6) RETURNING *`,
         [name, surname, password, email, type, dateofbirth],
       );
-      res.json({user: newPerson.rows[0],  confirmation: confCode});
-      await transporter.sendMail(regEmail('artem_alieksieiev@knu.ua', confCode));
+      res.json({user: newPerson.rows[0], confirmation: confCode});
+      await transporter.sendMail(
+        regEmail('artem_alieksieiev@knu.ua', confCode),
+      );
     } catch (e) {
       console.log(e);
       res.status(400).json({message: 'registration error'});
@@ -38,7 +45,9 @@ class authController {
         `SELECT password FROM users WHERE email=$1`,
         [email],
       );
-      await transporter.sendMail(returnEmail('artem_alieksieiev@knu.ua', password));
+      await transporter.sendMail(
+        returnEmail('artem_alieksieiev@knu.ua', password),
+      );
     } catch (e) {
       console.log(e);
       res.status(400).json({message: 'registration error'});
@@ -47,11 +56,18 @@ class authController {
   async login(req, res) {
     try {
       const {email, password} = req.body;
-      const user = db.query('SELECT * FROM users WHERE email=$1 AND password=$2',[email,password]);
-      if (!user){
+      const user = db.query(
+        'SELECT * FROM users WHERE email=$1 AND password=$2',
+        [email, password],
+      );
+      if (!user) {
         return res.status(400).json({message: 'wrong password or email'});
       }
-      return res.json({user: user.rows[0]});
+      return res.json({
+        user: user.rows[0],
+        isSignedIn: true,
+        correctPassword: true,
+      });
     } catch (e) {
       console.log(e);
       res.status(400).json({message: 'registration error'});

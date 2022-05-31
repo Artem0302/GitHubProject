@@ -5,6 +5,8 @@ import {SafeAreaProvider} from 'react-native-safe-area-context/src/SafeAreaConte
 import {NavigationContainer} from '@react-navigation/native';
 import Authorization from '../authorization';
 import MainScreen from '../searchScreen';
+import Registration from "../registration/registration";
+import Recovering from "../recovery";
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,8 @@ const MainApp = () => {
           ) : (
             <>
               <Stack.Screen name="Authorization" component={Authorization} />
+              <Stack.Screen name="Registration" component={Registration} />
+              <Stack.Screen name="Recovering" component={Recovering} />
             </>
           )}
         </Stack.Navigator>

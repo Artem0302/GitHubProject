@@ -9,9 +9,10 @@ import {
 import {useState} from 'react';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
-import {signIn} from '../../actions/actions';
+import { useNavigation } from "@react-navigation/native";
 
 const Authorization = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
@@ -41,14 +42,19 @@ const Authorization = () => {
         />
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Recovering')}>
         <Text style={styles.forgot_button}>Forgot Password?</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => dispatch(signIn(password, email))}>
+        onPress={() => console.log('hello')}>
         <Text>LOGIN</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => navigation.navigate('Registration')}>
+        <Text>REGISTER</Text>
       </TouchableOpacity>
     </View>
   );
