@@ -56,11 +56,11 @@ class authController {
   async login(req, res) {
     try {
       const {email, password} = req.body;
-      const user = db.query(
+      const user = await db.query(
         'SELECT * FROM users WHERE email=$1 AND password=$2',
         [email, password],
       );
-      if (!user) {
+      if (!user.rows[0]) {
         return res.status(400).json({message: 'wrong password or email'});
       }
       return res.json({

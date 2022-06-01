@@ -4,15 +4,16 @@ import {useSelector} from 'react-redux';
 import {SafeAreaProvider} from 'react-native-safe-area-context/src/SafeAreaContext';
 import {NavigationContainer} from '@react-navigation/native';
 import Authorization from '../authorization';
-import MainScreen from '../searchScreen';
 import Registration from "../registration/registration";
 import Recovering from "../recovery";
+import Confirmation from "../registration/confirmation";
+import MainScreen from "../appScreen";
 
 const Stack = createNativeStackNavigator();
 
 const MainApp = () => {
   const isSignedIn = useSelector(state => {
-    return state.isSignedIn;
+    return state.userReducer.isSignedIn;
   });
   return (
     <NavigationContainer>
@@ -26,6 +27,7 @@ const MainApp = () => {
             <>
               <Stack.Screen name="Authorization" component={Authorization} />
               <Stack.Screen name="Registration" component={Registration} />
+              <Stack.Screen name="Confirmation" component={Confirmation} />
               <Stack.Screen name="Recovering" component={Recovering} />
             </>
           )}

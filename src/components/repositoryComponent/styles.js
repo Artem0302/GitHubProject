@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     maxWidth: '50%',
   },
   forkStars: {
+    maxWidth: '50%',
     flexDirection: 'row',
   },
   closeBtn: {

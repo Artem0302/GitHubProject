@@ -5,12 +5,12 @@ import Repository from '../../components/repositoryComponent';
 import {useDispatch, useSelector} from 'react-redux';
 import {setCurrentPage} from '../../actions/actions';
 
-const MainScreen = () => {
+const SearchScreen = () => {
   const dispatch = useDispatch();
   const data = useSelector(state => {
-    return state.items;
+    return state.MainReducer.items;
   });
-  const currentPage = useSelector(state => state.currentPage);
+  const currentPage = useSelector(state => state.MainReducer.currentPage);
   return (
     <View style={{backgroundColor: '#FFFFFF'}}>
       <Search />
@@ -30,4 +30,4 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default SearchScreen;

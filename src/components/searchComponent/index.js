@@ -9,7 +9,7 @@ const Search = () => {
   const [repoName, setRepoName] = useState('');
   const [filter, setFilter] = useState('');
   const dispatch = useDispatch();
-  const currentPage = useSelector(state => state.currentPage);
+  const currentPage = useSelector(state => state.MainReducer.currentPage);
   useEffect(() => {
     if (repoName && currentPage!==1){
       dispatch(getRepos(repoName, currentPage,filter));

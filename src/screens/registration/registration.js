@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styles from './styles';
 import {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import { regUser } from "../../actions/userActions";
 
 const Registration = () => {
   const navigation = useNavigation();
@@ -69,7 +70,9 @@ const Registration = () => {
             placeholder="Password"
             placeholderTextColor="#003f5c"
             secureTextEntry={true}
-            onChangeText={text => setParameters({...parameters, password: text})}
+            onChangeText={text =>
+              setParameters({...parameters, password: text})
+            }
             onBlur={() => setValidParam(validation())}
           />
         </View>
@@ -105,7 +108,10 @@ const Registration = () => {
         {validParam ? (
           <TouchableOpacity
             style={styles.activeRegBtn}
-            onPress={() => console.log('hello')}>
+            onPress={() => {
+              dispatch(regUser({ ...parameters, type: type }));
+              navigation.navigate('Confirmation', {code: '1234'});
+            }}>
             <Text>REGISTER</Text>
           </TouchableOpacity>
         ) : (

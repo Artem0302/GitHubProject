@@ -1,4 +1,4 @@
-import {LOGIN} from '../constants';
+import {CONFIRMED, LOGIN, REGISTRATION} from '../constants';
 
 export const defaultState = {
   user: {},
@@ -9,12 +9,22 @@ export const defaultState = {
 const userReducer = (state = defaultState, action) => {
   switch (action.type) {
     case LOGIN:
-      return action.payload.user
-        ? action.payload
+      return action.user
+        ? action.user
         : {
             ...state,
             correctPassword: false,
           };
+    case REGISTRATION:
+      return {
+        ...state,
+        user: action.user,
+      };
+    case CONFIRMED:
+      return {
+        ...state,
+        isSignedIn: true,
+      };
     default:
       return state;
   }
