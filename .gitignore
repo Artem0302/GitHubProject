@@ -56,6 +56,7 @@ buck-out/
 # Bundle artifact
 *.jsbundle
 
+/server/keys/index.js
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
