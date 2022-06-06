@@ -32,3 +32,19 @@ create TABLE cvs(
     user_id SERIAL,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
+
+create TABLE links(
+    link_id SERIAL PRIMARY KEY,
+    link VARCHAR(255),
+    news_id SERIAL,
+    FOREIGN KEY (news_id) REFERENCES news (news_id)
+);
+
+create TABLE news(
+    news_id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    topic VARCHAR(255),
+    text TEXT,
+    user_id SERIAL,
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
+);

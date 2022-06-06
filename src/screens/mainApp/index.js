@@ -8,6 +8,7 @@ import Registration from "../registration/registration";
 import Recovering from "../recovery";
 import Confirmation from "../registration/confirmation";
 import MainScreen from "../appScreen";
+import Details from "../detailScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const MainApp = () => {
           {isSignedIn ? (
             <>
               <Stack.Screen name="MainScreen" component={MainScreen} />
+              <Stack.Screen name="Details" component={Details} />
             </>
           ) : (
             <>

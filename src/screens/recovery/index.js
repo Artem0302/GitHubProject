@@ -1,12 +1,25 @@
 import * as React from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
-import {useEffect, useState} from 'react';
+import { useCallback, useState } from "react";
 import {useNavigation} from '@react-navigation/native';
+import axios from "axios";
 
 const Recovering = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
+  const sendRequest = useCallback(async () => {
+    await axios.post('http://192.168.1.111:3000/auth/return-password', {
+      email: email,
+    }).then((response)=> {
+      Alert.alert('Check your email');
+      navigation.goBack();
+    })
+      .catch(error => {
+        Alert.alert('wrong email');
+        console.log(error);
+      });
+  });
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <TouchableOpacity
@@ -22,6 +35,7 @@ const Recovering = () => {
         </View>
         <View style={styles.inputView}>
           <TextInput
+            value={email}
             placeholder="Email"
             placeholderTextColor="#003f5c"
             onChangeText={text => setEmail(text)}
@@ -29,10 +43,7 @@ const Recovering = () => {
         </View>
         <TouchableOpacity
           style={styles.recoverBtn}
-          onPress={() => {
-            Alert.alert('Check your email');
-            navigation.goBack();
-          }}>
+          onPress={sendRequest}>
           <Text>Send my password</Text>
         </TouchableOpacity>
       </View>

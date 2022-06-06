@@ -2,9 +2,10 @@ import * as React from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './styles';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import { regUser } from "../../actions/userActions";
+import {regUser} from '../../actions/userActions';
+import axios from "axios";
 
 const Registration = () => {
   const navigation = useNavigation();
@@ -16,6 +17,20 @@ const Registration = () => {
     email: '',
     password: '',
     dateOfBirth: '',
+  });
+  const sendRequest = useCallback(async () => {
+    await axios.post('http://192.168.1.111:3000/auth/register', {
+      send: parameters.email,
+    }).then((response)=> {
+      navigation.navigate('Confirmation', {
+        user: {...parameters, type: type},
+        code: response.data.code,
+      });
+    })
+      .catch(error => {
+        Alert.alert('wrong email or this email already used');
+        console.log(error);
+      });
   });
   const validation = () => {
     for (let key in parameters) {
@@ -108,10 +123,7 @@ const Registration = () => {
         {validParam ? (
           <TouchableOpacity
             style={styles.activeRegBtn}
-            onPress={() => {
-              dispatch(regUser({ ...parameters, type: type }));
-              navigation.navigate('Confirmation', {code: '1234'});
-            }}>
+            onPress={sendRequest}>
             <Text>REGISTER</Text>
           </TouchableOpacity>
         ) : (

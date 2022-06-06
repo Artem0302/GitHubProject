@@ -1,20 +1,32 @@
-import { ADD} from "../constants";
+import { ADD, DELETEADVERT, GETMYADVERTS } from "../constants";
 
 export const defaultState = {
   adverts: [],
   myAdverts: [],
-  isSignedIn: false,
-  correctPassword: true,
 };
 
 const advertReducer = (state = defaultState, action) => {
   switch (action.type) {
     case ADD:
-      console.log([...state.myAdverts,action.advert]);
+      console.log(action.advert);
       return  {
           ...state,
           myAdverts: [...state.myAdverts,action.advert],
         };
+    case GETMYADVERTS:
+      return  {
+        ...state,
+        myAdverts: action.adverts,
+      };
+    case DELETEADVERT:
+      let newAdverts = [];
+      state.adverts.forEach((item)=>{if(item.adver_id===action.advertId){newAdverts.push(item)}});
+      let newMyAdverts = [];
+      state.myAdverts.forEach((item)=>{if(item.adver_id===action.advertId){newAdverts.push(item)}})
+      return  {
+        adverts: newAdverts,
+        myAdverts: newMyAdverts,
+      };
     default:
       return state;
   }

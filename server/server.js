@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/auth',authRouter);
 app.use('/user',userRouter);
-app.use('/advert',cvRouter);
-app.use('/cv',advertRouter);
+app.use('/advert',advertRouter);
+app.use('/cv',cvRouter);
 
 const start = async () => {
   try {

@@ -2,12 +2,11 @@ import React, {useState} from 'react';
 import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import styles from './styles';
-import {confirmUser} from '../../actions/userActions';
 import {add} from '../../actions/advertAction';
 
 const AddScreen = () => {
-  const type = useSelector(state => {
-    return state.userReducer.user.type;
+  const user = useSelector(state => {
+    return state.userReducer.user;
   });
   const dispatch = useDispatch();
   const [parameters, setParameters] = useState({
@@ -16,7 +15,7 @@ const AddScreen = () => {
     salary: '',
     description: '',
   });
-  return type === 'hr' ? (
+  return user.type === 'hr' ? (
     <View style={styles.container}>
       <View style={styles.inputView}>
         <TextInput
@@ -56,21 +55,25 @@ const AddScreen = () => {
       <TouchableOpacity
         style={styles.activeRegBtn}
         onPress={() => {
-          dispatch(add(parameters));
-          Alert.alert('New advert was added');
-          setParameters({
-            title: '',
-            link: '',
-            salary: '',
-            description: '',
-          });
+          if(parameters.title && parameters.salary && parameters.description){
+            dispatch(add({ ...parameters,user_id: user.user_id }));
+            Alert.alert('New advert was added');
+            setParameters({
+              title: '',
+              link: '',
+              salary: '',
+              description: '',
+            });
+          } else{
+            Alert.alert('Fill in the fields');
+          }
         }}>
         <Text>FURTHER</Text>
       </TouchableOpacity>
     </View>
   ) : (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Settings!</Text>
+      <Text>Later...!</Text>
     </View>
   );
 };

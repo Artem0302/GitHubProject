@@ -49,7 +49,9 @@ const Authorization = () => {
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => {
-          dispatch(login(email, password));
+          if (password && email) {
+            dispatch(login(email, password));
+          }
         }}>
         <Text>LOGIN</Text>
       </TouchableOpacity>
@@ -57,7 +59,9 @@ const Authorization = () => {
         <></>
       ) : (
         <View>
-          <Text style={{height: 30,color: '#FF0000'}}>wrong password or email</Text>
+          <Text style={{height: 30, color: '#FF0000'}}>
+            wrong password or email
+          </Text>
         </View>
       )}
       <TouchableOpacity

@@ -4,12 +4,12 @@ import styles from './styles';
 import {useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
-import { confirmUser } from "../../actions/userActions";
+import { confirmUser, regUser } from "../../actions/userActions";
 
 const Confirmation = () => {
   const dispatch = useDispatch();
   const route = useRoute();
-  const {code} = route.params;
+  const {user,code} = route.params;
   const navigation = useNavigation();
   const [confCode, setConfCode] = useState('');
   return (
@@ -31,6 +31,7 @@ const Confirmation = () => {
           style={styles.activeRegBtn}
           onPress={() => {
             if (confCode === code) {
+              dispatch(regUser(user));
               dispatch(confirmUser());
             } else {
               Alert.alert('code is wrong');

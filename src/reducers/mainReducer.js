@@ -2,6 +2,7 @@ import {CLEAR_REPOS, SET_CURRENT_PAGE, SET_REPOS} from '../constants';
 import userReducer from './userReducer';
 import {combineReducers} from 'redux';
 import advertReducer from "./advertReducer";
+import cvReducer from "./cvReducer";
 
 export const defaultState = {
   items: [],
@@ -31,6 +32,7 @@ const MainReducer = (state = defaultState, action) => {
 };
 
 export default combineReducers({
+  cvReducer,
   advertReducer,
   MainReducer,
   userReducer,

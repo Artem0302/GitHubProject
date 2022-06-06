@@ -24,8 +24,29 @@ class cvController {
   }
   async getCVs(req, res) {
     try {
-      const cvs = await db.query('SELECT * FROM adverts');
-      res.json(cvs.rows[0]);
+      if(req.body.userId){
+        const user_id = req.body.userId;
+        const myCvs = await db.query('SELECT * FROM cvs WHERE user_id = $1',[user_id]);
+        res.json(myCvs.rows);
+      }else{
+        const cvs = await db.query('SELECT * FROM cvs');
+        res.json(cvs.rows);
+      }
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({message: 'error'});
+    }
+  }
+  async searchCvs(req, res) {
+    try {
+      if(req.body.speciality){
+        const speciality = req.body.speciality;
+        const cvs = await db.query('SELECT * FROM cvs WHERE speciality = $1',[speciality]);
+        res.json(cvs.rows);
+      }else{
+        const cvs = await db.query('SELECT * FROM cvs');
+        res.json(cvs.rows);
+      }
     } catch (e) {
       console.log(e);
       res.status(400).json({message: 'error'});
@@ -34,7 +55,7 @@ class cvController {
   async getOneCV(req, res) {
     try {
       const id = req.params.id;
-      const cv = await db.query('SELECT * FROM adverts WHERE id=$1', [id]);
+      const cv = await db.query('SELECT * FROM cvs WHERE id=$1', [id]);
       res.json(cv.rows[0]);
     } catch (e) {
       console.log(e);
