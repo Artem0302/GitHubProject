@@ -50,6 +50,17 @@ class advertController {
       res.status(400).json({message: 'error'});
     }
   }
+  async putAdvert(req, res) {
+    try {
+      const id = req.params.id;
+      const advert = await db.query('DELETE FROM adverts WHERE id=$1', [id]);
+      console.log(advert.rows);
+      res.json(advert.rows[0]);
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({message: 'error'});
+    }
+  }
 }
 
 module.exports = new advertController();
